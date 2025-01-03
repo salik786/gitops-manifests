@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: even-odd-model
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: even-odd-model
+  template:
+    metadata:
+      labels:
+        app: even-odd-model
+    spec:
+      containers:
+        - name: even-odd-model
+          image: even-odd-model:latest
+          ports:
+            - containerPort: 5001

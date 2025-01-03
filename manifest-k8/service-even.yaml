@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: even-odd-model-service
+spec:
+  selector:
+    app: even-odd-model
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5001
+  type: LoadBalancer
