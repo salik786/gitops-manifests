@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-model-deployment
+  namespace: ai-models
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-model
+  template:
+    metadata:
+      labels:
+        app: sample-model
+    spec:
+      containers:
+        - name: sample-model
+          image: sample-model:latest
+          imagePullPolicy: Never # This is important!
+          ports:
+            - containerPort: 5000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 10
